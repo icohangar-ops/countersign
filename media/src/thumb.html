@@ -1,0 +1,51 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+  html,body{margin:0;width:1024px;height:1024px;overflow:hidden;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;}
+  .card{position:relative;width:1024px;height:1024px;background:#0d1117;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;}
+  /* Faint grid — reads as structure, disappears at thumbnail size. */
+  .grid{position:absolute;inset:0;opacity:.5;
+    background-image:linear-gradient(#1c2128 1px,transparent 1px),linear-gradient(90deg,#1c2128 1px,transparent 1px);
+    background-size:64px 64px;}
+  .glow{position:absolute;width:900px;height:900px;border-radius:50%;
+    background:radial-gradient(circle,rgba(63,185,80,.10) 0%,rgba(13,17,23,0) 62%);}
+  .inner{position:relative;display:flex;flex-direction:column;align-items:center;}
+
+  /* The three lanes — the product in one glance. */
+  .lanes{display:flex;gap:14px;margin-bottom:64px;}
+  .pill{font:600 25px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.10em;
+    padding:15px 26px;border-radius:999px;border:2px solid;}
+  .auto{color:#3fb950;border-color:#2ea04326;background:#3fb9501a;}
+  .appr{color:#d29922;border-color:#d2992226;background:#d299221a;}
+  .blk {color:#f85149;border-color:#f8514926;background:#f851491a;}
+
+  .mark{display:flex;align-items:flex-end;gap:22px;margin-bottom:34px;}
+  .tick{font:300 96px/1 ui-monospace,Menlo,monospace;}
+  .t1{color:#7d8590;}                 /* the agent's proposal  */
+  .t2{color:#3fb950;font-weight:600;} /* the human's countersignature */
+
+  h1{margin:0;font-size:120px;font-weight:640;letter-spacing:-.032em;color:#f0f6fc;line-height:1;}
+  .rule{width:230px;height:3px;background:#30363d;margin:44px 0 34px;}
+  p{margin:0;font-size:37px;font-weight:450;color:#8b949e;letter-spacing:-.008em;text-align:center;}
+  .foot{position:absolute;bottom:74px;font:500 25px/1 ui-monospace,Menlo,monospace;
+    color:#484f58;letter-spacing:.13em;}
+</style></head>
+<body>
+  <div class="card">
+    <div class="grid"></div><div class="glow"></div>
+    <div class="inner">
+      <div class="lanes">
+        <span class="pill auto">AUTO</span>
+        <span class="pill appr">APPROVAL</span>
+        <span class="pill blk">BLOCKED</span>
+      </div>
+      <!-- Two marks: what the agent proposed, and the signature that authorized it. -->
+      <div class="mark"><span class="tick t1">✓</span><span class="tick t2">✓</span></div>
+      <h1>Countersign</h1>
+      <div class="rule"></div>
+      <p>The human gate for agent spend</p>
+    </div>
+    <div class="foot">AGENTS PROPOSE · YOU AUTHORIZE</div>
+  </div>
+</body></html>

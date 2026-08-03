@@ -74,3 +74,15 @@ is generated in native.builder this week.
 ## License
 
 MIT — see [LICENSE](LICENSE). Copyright (c) 2026 Shyam Desigan.
+
+## Submission media
+
+| File | For |
+|---|---|
+| `media/cover-16x9.png` | Cover image · 1920×1080, exactly 16:9 |
+| `media/thumbnail-1x1.png` | Team thumbnail · 1024×1024 |
+| `media/pitch-deck.pdf` | Slide presentation · 9 slides, 16:9 |
+| `media/VIDEO_SCRIPT.md` | Demo video script — **the video itself has to be recorded by a human** |
+| `media/src/` | The HTML each asset was rendered from, so any of it can be regenerated |
+
+Everything except the video is generated and ready to upload.

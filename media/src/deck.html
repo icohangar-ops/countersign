@@ -1,0 +1,154 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+  @page{size:1600px 900px;margin:0;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;background:#0d1117;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .s{position:relative;width:1600px;height:900px;padding:96px 110px;overflow:hidden;
+     display:flex;flex-direction:column;justify-content:center;page-break-after:always;background:#0d1117;}
+  .s:last-child{page-break-after:auto;}
+  .grid{position:absolute;inset:0;opacity:.5;
+    background-image:linear-gradient(#1c2128 1px,transparent 1px),linear-gradient(90deg,#1c2128 1px,transparent 1px);
+    background-size:72px 72px;}
+  .n{position:absolute;right:70px;bottom:52px;font:600 17px/1 ui-monospace,Menlo,monospace;color:#3d444d;letter-spacing:.1em;}
+  .k{position:relative;font:600 20px/1 ui-monospace,Menlo,monospace;color:#6e7681;letter-spacing:.15em;margin-bottom:34px;}
+  h1{position:relative;margin:0;font-size:118px;font-weight:640;letter-spacing:-.033em;color:#f0f6fc;line-height:.98;}
+  h2{position:relative;margin:0 0 34px;font-size:66px;font-weight:620;letter-spacing:-.026em;color:#f0f6fc;line-height:1.08;}
+  p{position:relative;margin:0;font-size:36px;line-height:1.48;color:#8b949e;font-weight:400;max-width:1180px;}
+  p+p{margin-top:26px;}
+  b{color:#f0f6fc;font-weight:600;}
+  .g{color:#3fb950;font-weight:600;} .a{color:#e3b341;font-weight:600;} .r{color:#f85149;font-weight:600;}
+  .sub{position:relative;margin-top:34px;font-size:42px;color:#8b949e;}
+  .rule{position:relative;width:150px;height:3px;background:#30363d;margin:44px 0 30px;}
+  .lanes{position:relative;display:flex;gap:12px;margin-bottom:44px;}
+  .pill{font:600 19px/1 ui-monospace,Menlo,monospace;letter-spacing:.11em;padding:12px 21px;border-radius:999px;border:2px solid;}
+  .pa{color:#3fb950;border-color:#2ea04330;background:#3fb9501a;}
+  .pb{color:#d29922;border-color:#d2992230;background:#d299221a;}
+  .pc{color:#f85149;border-color:#f8514930;background:#f851491a;}
+  ul{position:relative;margin:0;padding:0;list-style:none;}
+  li{font-size:34px;line-height:1.4;color:#8b949e;padding-left:44px;position:relative;margin-bottom:28px;}
+  li:before{content:"";position:absolute;left:0;top:16px;width:16px;height:16px;border-radius:50%;background:#30363d;}
+  li.on:before{background:#3fb950;}
+  .two{position:relative;display:flex;gap:74px;align-items:flex-start;}
+  .col{flex:1;}
+  .col h3{margin:0 0 20px;font:600 25px/1 ui-monospace,Menlo,monospace;letter-spacing:.09em;}
+  .col p{font-size:31px;}
+  .mono{position:relative;font:400 26px/1.62 ui-monospace,SFMono-Regular,Menlo,monospace;color:#8b949e;
+    background:#161b22;border:1px solid #21262d;border-radius:14px;padding:34px 38px;white-space:pre;}
+  .q{position:relative;border-left:4px solid #30363d;padding-left:34px;}
+  .q .num{font:600 22px/1 ui-monospace,Menlo,monospace;color:#6e7681;letter-spacing:.1em;}
+  .q .t{margin-top:12px;font-size:38px;color:#f0f6fc;font-weight:560;}
+  .q .d{margin-top:10px;font-size:29px;color:#7d8590;line-height:1.4;}
+  .q+.q{margin-top:38px;}
+</style></head>
+<body>
+
+<!-- 1 ─ title -->
+<div class="s"><div class="grid"></div>
+  <div class="lanes"><span class="pill pa">AUTO</span><span class="pill pb">APPROVAL</span><span class="pill pc">BLOCKED</span></div>
+  <h1>Countersign</h1>
+  <div class="sub">The human gate for agent spend.</div>
+  <div class="rule"></div>
+  <div class="k" style="margin:0">AGENTS PROPOSE · MANDATES AUTHORIZE · YOU COUNTERSIGN</div>
+  <div class="n">01</div>
+</div>
+
+<!-- 2 ─ the problem -->
+<div class="s"><div class="grid"></div>
+  <div class="k">THE PROBLEM</div>
+  <h2>The agent did the thinking.<br>A person did the paying.</h2>
+  <p>An agent works out that the warehouse stocks out in three days. It drafts the purchase order. Then it sends someone a notification — and a human opens a supplier portal and types in a card number.</p>
+  <p>Every “AI for operations” product stops at exactly this wall.</p>
+  <div class="n">02</div>
+</div>
+
+<!-- 3 ─ why unsolved -->
+<div class="s"><div class="grid"></div>
+  <div class="k">WHY NOBODY FIXED IT</div>
+  <h2>Giving the agent a card<br>is the worse option.</h2>
+  <p>Now a model with a plausible hallucination has your card.</p>
+  <p>Finance teams haven’t handed spend authority to agents because agents are bad at deciding what to buy. They haven’t because nobody could answer one question:</p>
+  <p style="margin-top:34px"><b>Who authorized this, and what stopped it going further?</b></p>
+  <div class="n">03</div>
+</div>
+
+<!-- 4 ─ the insight -->
+<div class="s"><div class="grid"></div>
+  <div class="k">THE INSIGHT</div>
+  <h2>Two limits. One decision.</h2>
+  <div class="two">
+    <div class="col"><h3 style="color:#3fb950">THE AGENT’S THRESHOLD</h3>
+      <p>What <b>we</b> let an agent do without a human. A line in our own config — which a bug can step over.</p></div>
+    <div class="col"><h3 style="color:#58a6ff">THE MANDATE CAP</h3>
+      <p>What the <b>card network</b> will actually authorize. Enforced by Visa — but blind to whether this spend is sensible.</p></div>
+  </div>
+  <p style="margin-top:52px"><b>A spend is automatic only when both agree.</b> Everything else escalates, or is refused.</p>
+  <div class="n">04</div>
+</div>
+
+<!-- 5 ─ the card -->
+<div class="s"><div class="grid"></div>
+  <div class="k">THE CARD</div>
+  <h2>Three questions, in the order<br>an approver actually asks them.</h2>
+  <div class="q"><div class="num">01</div><div class="t">Why is this my decision?</div>
+    <div class="d">Over the agent’s limit. No standing authorization. Budget exhausted. This leads the card — everything else is context.</div></div>
+  <div class="q"><div class="num">02</div><div class="t">What authorized it?</div>
+    <div class="d">The policy clause, quoted, with its source. Not the agent’s own reasoning.</div></div>
+  <div class="q"><div class="num">03</div><div class="t">Where does the money come from?</div>
+    <div class="d">The mandate and what’s left on it — in words, never an id.</div></div>
+  <div class="n">05</div>
+</div>
+
+<!-- 6 ─ architecture -->
+<div class="s"><div class="grid"></div>
+  <div class="k">ARCHITECTURE</div>
+  <h2>Built in native.builder.</h2>
+  <div class="mono">   governor (upstream)          native.builder app            Prava
+   ┌────────────────────┐        ┌──────────────────┐
+   │ six deny-first     │        │  Inbox           │
+   │ gates              │  cards │  Detail          │  decision
+   │        ▼           │ ──────▶│  Decided         │ ─────────▶  mandate
+   │  approval lane     │  JSON  │                  │             charge
+   └────────────────────┘        │  Supabase        │               or
+                                 │  web push · PWA  │            passkey</div>
+  <p style="margin-top:44px;font-size:32px">UI, database, auth, ingest, notifications, deployment — <b>all of it generated in native.builder.</b> The governor upstream is a data connection, which is one of the integrations it advertises.</p>
+  <div class="n">06</div>
+</div>
+
+<!-- 7 ─ why it belongs on a phone -->
+<div class="s"><div class="grid"></div>
+  <div class="k">WHY A PHONE</div>
+  <h2>A list is a web page.<br>A notification is a product.</h2>
+  <p>Approvals are the one part of a spend-governance system that never happens at a desk. The decision is small, it is urgent, and it blocks an agent that is otherwise ready to act.</p>
+  <p><b>Push notification → one card → two taps.</b> Under ten seconds, standing up.</p>
+  <div class="n">07</div>
+</div>
+
+<!-- 8 ─ what is real -->
+<div class="s"><div class="grid"></div>
+  <div class="k">STATUS · HONESTLY</div>
+  <h2>What is real today.</h2>
+  <ul>
+    <li class="on">The upstream governor — six deny-first gates, <b>78 passing tests</b>, MIT, public</li>
+    <li class="on">Live approval feed — three pending cards, three genuinely different reasons</li>
+    <li class="on">The card contract, including what is deliberately withheld from a phone</li>
+    <li>The app itself — generated in native.builder during this event</li>
+    <li>Web push, installable PWA, Supabase auth</li>
+  </ul>
+  <p style="margin-top:16px;font-size:30px">The governor predates this event by three days and is disclosed as prior work. The <b>human surface has never existed</b> — that is what is being built here.</p>
+  <div class="n">08</div>
+</div>
+
+<!-- 9 ─ close -->
+<div class="s"><div class="grid"></div>
+  <div class="k">COUNTERSIGN</div>
+  <h2>Your agents can spend now.</h2>
+  <p style="font-size:44px;color:#f0f6fc">This is who approved it.</p>
+  <div class="rule"></div>
+  <div class="mono" style="font-size:24px">github.com/icohangar-ops/countersign
+github.com/icohangar-ops/metabospend        MIT</div>
+  <div class="n">09</div>
+</div>
+
+</body></html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Countersign — The Human Gate for Agent Spend</title>
+<meta name="description" content="Agents propose. Mandates authorize. You countersign. The phone surface for human-in-the-loop agent spending decisions.">
+<meta property="og:title" content="Countersign">
+<meta property="og:description" content="The human gate for agent spend.">
+<meta property="og:image" content="cover-16x9.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔏</text></svg>">
+<style>
+  :root{--bg:#0d1117;--surface:#161b22;--border:#21262d;--border-light:#30363d;--text:#8b949e;--text-bright:#f0f6fc;--green:#3fb950;--green-dim:#2ea04330;--yellow:#e3b341;--yellow-dim:#d2992230;--red:#f85149;--red-dim:#f8514930;--blue:#58a6ff;--font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Helvetica,Arial,sans-serif;--font-mono:ui-monospace,SFMono-Regular,Menlo,monospace;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--font-sans);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  a{color:var(--blue);text-decoration:none;}a:hover{text-decoration:underline;}
+
+  /* grid bg */
+  .grid-bg{position:fixed;inset:0;opacity:.35;pointer-events:none;z-index:0;
+    background-image:linear-gradient(#1c2128 1px,transparent 1px),linear-gradient(90deg,#1c2128 1px,transparent 1px);
+    background-size:72px 72px;}
+
+  /* nav */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(16px);background:rgba(13,17,23,.8);border-bottom:1px solid var(--border);}
+  nav .inner{max-width:1120px;margin:0 auto;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;}
+  nav .logo{font:600 18px/1 var(--font-mono);color:var(--text-bright);letter-spacing:.08em;}
+  nav .links{display:flex;gap:28px;}
+  nav .links a{font-size:14px;color:var(--text);transition:color .15s;}nav .links a:hover{color:var(--text-bright);text-decoration:none;}
+
+  /* sections */
+  section{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:0 32px;}
+
+  /* hero */
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:80px;}
+  .hero .lanes{display:flex;gap:10px;margin-bottom:36px;}
+  .pill{font:600 14px/1 var(--font-mono);letter-spacing:.11em;padding:10px 18px;border-radius:999px;border:2px solid;}
+  .pill.g{color:var(--green);border-color:var(--green-dim);background:rgba(63,185,80,.1);}
+  .pill.y{color:var(--yellow);border-color:var(--yellow-dim);background:rgba(227,179,65,.1);}
+  .pill.r{color:var(--red);border-color:var(--red-dim);background:rgba(248,81,73,.1);}
+  .hero h1{font-size:clamp(48px,8vw,96px);font-weight:640;letter-spacing:-.033em;color:var(--text-bright);line-height:.98;margin-bottom:20px;}
+  .hero .tagline{font-size:clamp(18px,2.5vw,28px);color:var(--text);margin-bottom:12px;}
+  .hero .sub{font:600 15px/1 var(--font-mono);color:var(--border-light);letter-spacing:.15em;margin-top:40px;}
+  .hero .rule{width:120px;height:3px;background:var(--border-light);margin:32px 0;}
+
+  /* problem */
+  .problem{padding:120px 32px;}
+  .kicker{font:600 16px/1 var(--font-mono);color:var(--border-light);letter-spacing:.15em;margin-bottom:28px;}
+  h2{font-size:clamp(28px,4.5vw,52px);font-weight:620;letter-spacing:-.026em;color:var(--text-bright);line-height:1.1;margin-bottom:28px;}
+  p.body{font-size:18px;line-height:1.7;color:var(--text);max-width:680px;}
+  p.body+p.body{margin-top:18px;}
+  p.body b{color:var(--text-bright);}
+
+  /* insight cards */
+  .insight{padding:120px 32px;}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin:40px 0;}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:36px;}
+  .card h3{font:600 16px/1 var(--font-mono);letter-spacing:.09em;margin-bottom:16px;}
+  .card p{font-size:17px;line-height:1.6;}
+  .card p b{color:var(--text-bright);}
+
+  /* card design */
+  .card-design{padding:120px 32px;}
+  .q{border-left:4px solid var(--border-light);padding-left:28px;margin-bottom:32px;}
+  .q .num{font:600 16px/1 var(--font-mono);color:var(--border-light);letter-spacing:.1em;}
+  .q .t{margin-top:8px;font-size:24px;color:var(--text-bright);font-weight:560;}
+  .q .d{margin-top:8px;font-size:17px;color:var(--text);line-height:1.5;}
+
+  /* architecture */
+  .arch{padding:120px 32px;}
+  .mono-box{font:400 15px/1.62 var(--font-mono);color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 32px;white-space:pre;overflow-x:auto;margin:32px 0;}
+
+  /* video */
+  .video-section{padding:120px 32px;text-align:center;}
+  .video-wrap{position:relative;width:100%;max-width:800px;margin:40px auto 0;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#000;aspect-ratio:16/9;}
+  .video-wrap video{width:100%;height:100%;object-fit:contain;}
+  .video-wrap img{width:100%;height:100%;object-fit:cover;}
+
+  /* status */
+  .status{padding:120px 32px;}
+  ul.checklist{list-style:none;}
+  ul.checklist li{font-size:18px;line-height:1.5;padding:10px 0 10px 40px;position:relative;}
+  ul.checklist li::before{content:'';position:absolute;left:0;top:18px;width:14px;height:14px;border-radius:50%;background:var(--border-light);}
+  ul.checklist li.on::before{background:var(--green);}
+  ul.checklist li b{color:var(--text-bright);}
+
+  /* footer */
+  footer{position:relative;z-index:1;text-align:center;padding:80px 32px;border-top:1px solid var(--border);margin-top:80px;}
+  footer .links{display:flex;justify-content:center;gap:24px;margin-top:20px;}
+  footer .links a{font:400 15px/1 var(--font-mono);color:var(--text);}
+
+  @media(max-width:768px){
+    .cols{grid-template-columns:1fr;}
+    nav .links{display:none;}
+    .hero h1{font-size:40px;}
+    section{padding-left:20px;padding-right:20px;}
+    .problem,.insight,.card-design,.arch,.video-section,.status{padding:80px 20px;}
+  }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<nav><div class="inner">
+  <div class="logo">COUNTERSIGN</div>
+  <div class="links">
+    <a href="#problem">Problem</a>
+    <a href="#insight">Insight</a>
+    <a href="#card">The Card</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#demo">Demo</a>
+    <a href="#status">Status</a>
+  </div>
+</div></nav>
+
+<section class="hero">
+  <div class="lanes">
+    <span class="pill g">AUTO</span>
+    <span class="pill y">APPROVAL</span>
+    <span class="pill r">BLOCKED</span>
+  </div>
+  <h1>Countersign</h1>
+  <div class="tagline">The human gate for agent spend.</div>
+  <div class="rule"></div>
+  <div class="sub">AGENTS PROPOSE &middot; MANDATES AUTHORIZE &middot; YOU COUNTERSIGN</div>
+</section>
+
+<section class="problem" id="problem">
+  <div class="kicker">THE PROBLEM</div>
+  <h2>The agent did the thinking.<br>A person did the paying.</h2>
+  <p class="body">An agent works out that the warehouse stocks out in three days. It drafts the purchase order. Then it sends someone a notification &mdash; and a human opens a supplier portal and types in a card number.</p>
+  <p class="body">Every &ldquo;AI for operations&rdquo; product stops at exactly this wall.</p>
+</section>
+
+<section class="problem" style="padding-top:0;">
+  <div class="kicker">WHY NOBODY FIXED IT</div>
+  <h2>Giving the agent a card<br>is the worse option.</h2>
+  <p class="body">Now a model with a plausible hallucination has your card.</p>
+  <p class="body">Finance teams haven&rsquo;t handed spend authority to agents because agents are bad at deciding what to buy. They haven&rsquo;t because nobody could answer one question:</p>
+  <p class="body" style="margin-top:28px;"><b>Who authorized this, and what stopped it going further?</b></p>
+</section>
+
+<section class="insight" id="insight">
+  <div class="kicker">THE INSIGHT</div>
+  <h2>Two limits. One decision.</h2>
+  <div class="cols">
+    <div class="card">
+      <h3 style="color:var(--green)">THE AGENT&rsquo;S THRESHOLD</h3>
+      <p>What <b>we</b> let an agent do without a human. A line in our own config &mdash; which a bug can step over.</p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--blue)">THE MANDATE CAP</h3>
+      <p>What the <b>card network</b> will actually authorize. Enforced by Visa &mdash; but blind to whether this spend is sensible.</p>
+    </div>
+  </div>
+  <p class="body"><b>A spend is automatic only when both agree.</b> Everything else escalates, or is refused.</p>
+</section>
+
+<section class="card-design" id="card">
+  <div class="kicker">THE CARD</div>
+  <h2>Three questions, in the order<br>an approver actually asks them.</h2>
+  <div class="q"><div class="num">01</div><div class="t">Why is this my decision?</div>
+    <div class="d">Over the agent&rsquo;s limit. No standing authorization. Budget exhausted. This leads the card &mdash; everything else is context.</div></div>
+  <div class="q"><div class="num">02</div><div class="t">What authorized it?</div>
+    <div class="d">The policy clause, quoted, with its source. Not the agent&rsquo;s own reasoning.</div></div>
+  <div class="q"><div class="num">03</div><div class="t">Where does the money come from?</div>
+    <div class="d">The mandate and what&rsquo;s left on it &mdash; in words, never an id.</div></div>
+</section>
+
+<section class="arch" id="architecture">
+  <div class="kicker">ARCHITECTURE</div>
+  <h2>Built in native.builder.</h2>
+  <div class="mono-box">   MetaboSpend governor          native.builder app            Prava
+   (upstream, pre-existing)      (built this week)
+   &plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;        &plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;
+   | six deny-first gates |        |  Inbox           |
+   |        |            | cards |  Detail          |  decision
+   |        v            | ----->|  Decided         | -------->  mandate
+   |  approval lane      |  JSON |                  |             charge
+   &plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;&plusmn;        |  Supabase        |               or
+                                |  web push / PWA  |            passkey</div>
+  <p class="body">UI, database, auth, ingest, notifications, deployment &mdash; <b>all of it generated in native.builder.</b> The governor upstream is a data connection, which is one of the integrations it advertises.</p>
+</section>
+
+<section class="video-section" id="demo">
+  <div class="kicker">DEMO</div>
+  <h2>See it in action.</h2>
+  <div class="video-wrap">
+    <video controls preload="metadata" poster="/cover-16x9.png">
+      <source src="/Countersign_Demo.mp4" type="video/mp4">
+    </video>
+  </div>
+</section>
+
+<section class="status" id="status">
+  <div class="kicker">STATUS &middot; HONESTLY</div>
+  <h2>What is real today.</h2>
+  <ul class="checklist">
+    <li class="on">The upstream governor &mdash; six deny-first gates, <b>78 passing tests</b>, MIT, public</li>
+    <li class="on">Live approval feed &mdash; three pending cards, three genuinely different reasons</li>
+    <li class="on">The card contract, including what is deliberately withheld from a phone</li>
+    <li>The app itself &mdash; generated in native.builder during this event</li>
+    <li>Web push, installable PWA, Supabase auth</li>
+  </ul>
+  <p class="body" style="margin-top:24px;">The governor predates this event by three days and is disclosed as prior work. The <b>human surface has never existed</b> &mdash; that is what is being built here.</p>
+</section>
+
+<footer>
+  <div style="font-size:28px;font-weight:640;color:var(--text-bright);letter-spacing:-.03em;">Your agents can spend now.</div>
+  <div style="font-size:22px;color:var(--text-bright);margin-top:8px;">This is who approved it.</div>
+  <div class="links">
+    <a href="https://github.com/icohangar-ops/countersign" target="_blank">GitHub</a>
+    <a href="https://github.com/icohangar-ops/metabospend" target="_blank">MetaboSpend</a>
+    <a href="https://lablab.ai/ai-hackathons/nativebuilder-build-without-limits" target="_blank">Hackathon</a>
+  </div>
+  <div style="margin-top:32px;font-size:13px;color:var(--border-light);">MIT &middot; 2026</div>
+</footer>
+
+</body></html>

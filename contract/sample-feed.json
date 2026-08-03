@@ -1,0 +1,88 @@
+{
+  "generatedAt": "2026-08-03T20:39:44.533Z",
+  "decisionCallback": "POST /approvals/{id}/decide  { decision: 'approve'|'reject', note?: string }",
+  "pending": [
+    {
+      "id": "restock_PLT-900_2026-08-03",
+      "agent": "Restock Agent",
+      "kind": "purchase",
+      "amountDisplay": "3780.00 USD",
+      "amountMinor": 378000,
+      "currency": "USD",
+      "merchant": {
+        "name": "Acme Supply",
+        "url": "https://acmesupply.com"
+      },
+      "why": "PLT-900 is at 5 units in DC-1, below the 60-unit reorder point — 0 days of cover left at 9/day. Ordering 270 units for 30 days of cover.",
+      "needsHumanBecause": "3780.00 USD is over the Restock Agent's 2500.00 USD limit",
+      "gatesPassed": [
+        "Funds authorized"
+      ],
+      "reasonCodes": [
+        "mandate_covers_spend",
+        "over_agent_cap"
+      ],
+      "authorizedBy": [
+        {
+          "source": "Procurement Policy v4 §3.2",
+          "excerpt": "Replenishment orders with approved suppliers may be issued by automated systems up to $10,000 per order."
+        }
+      ],
+      "fundingSource": "Acme Supply mandate · 8000.00 USD remaining",
+      "queuedAt": "2026-08-03T20:39:44.533Z",
+      "decisionRef": "cmVzdG9ja19QTFQtOTAwXzIwMjYtMDgtMDM6bWR0X2FjbWU"
+    },
+    {
+      "id": "renew_shipstation-com_2026-08-05",
+      "agent": "Renewal Agent",
+      "kind": "renewal",
+      "amountDisplay": "1119.96 USD",
+      "amountMinor": 111996,
+      "currency": "USD",
+      "merchant": {
+        "name": "ShipStation",
+        "url": "https://shipstation.com"
+      },
+      "why": "ShipStation Enterprise plan renews 2026-08-05. Attributed value 6200.00 exceeds cost 1400.00. Dropping 3 idle seat(s), saving 279.99/mo.",
+      "needsHumanBecause": "No standing authorization covers ShipStation — approving mints a one-time card",
+      "gatesPassed": [],
+      "reasonCodes": [
+        "no_mandate_match"
+      ],
+      "authorizedBy": [
+        {
+          "source": "Vendor Register 2026 §ShipStation",
+          "excerpt": "ShipStation is an approved recurring vendor; monthly renewals under $2,000 require no further authorization."
+        }
+      ],
+      "fundingSource": null,
+      "queuedAt": "2026-08-03T20:39:44.533Z",
+      "decisionRef": "cmVuZXdfc2hpcHN0YXRpb24tY29tXzIwMjYtMDgtMDU6c2Vzc2lvbg"
+    },
+    {
+      "id": "topup_ads-google-com_2026-08-03",
+      "agent": "Budget Agent",
+      "kind": "topup",
+      "amountDisplay": "1680.00 USD",
+      "amountMinor": 168000,
+      "currency": "USD",
+      "merchant": {
+        "name": "Google Ads",
+        "url": "https://ads.google.com"
+      },
+      "why": "Brand — Search on Google Ads is at 3.90× ROAS (target 2.00×) with 0 day(s) of budget left. Topping up 7 days at 240.00/day.",
+      "needsHumanBecause": "1680.00 USD is over the Budget Agent's 1000.00 USD limit",
+      "gatesPassed": [
+        "Funds authorized"
+      ],
+      "reasonCodes": [
+        "mandate_covers_spend",
+        "over_agent_cap"
+      ],
+      "authorizedBy": [],
+      "fundingSource": "Google Ads mandate · 3000.00 USD remaining",
+      "queuedAt": "2026-08-03T20:39:44.533Z",
+      "decisionRef": "dG9wdXBfYWRzLWdvb2dsZS1jb21fMjAyNi0wOC0wMzptZHRfYWRz"
+    }
+  ]
+}

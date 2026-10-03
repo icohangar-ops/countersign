@@ -11,6 +11,16 @@ its own. Some of it should not — and the moment it needs a person, that person
 almost never at a desk. Countersign is the phone surface for those decisions: a
 push notification, one card, and two taps.
 
+<!-- product-screenshots:start -->
+## Product screenshots
+
+Approval-gating landing screen with automatic, approval, and blocked states; the demo was not run.
+
+![countersign interface](docs/screenshots/product-overview.png)
+
+Captured locally and non-interactively from [source commit 2879bf130014](https://github.com/icohangar-ops/countersign/tree/2879bf13001451937e170d4a694743b8e991aa60); approval-gating landing screen with automatic, approval, and blocked states; the demo was not run.
+<!-- product-screenshots:end -->
+
 ## The card
 
 Each pending item answers three questions in the order an approver actually asks
